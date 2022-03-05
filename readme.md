@@ -2,6 +2,11 @@
 ## Author: Nazmul Hasan Rabbi
 ## Date: March 5 2022
 
+### Project Context
+This project allowed me to earn the Google Data Analytics Professional Certificate. I did this project to comply with the capstone project requirement of the certificate.
+
+[Verify Certification](https://www.credly.com/badges/f77d7864-f062-473a-a918-11eeafacab33/public_url)
+
 ### Background
 
 In 2016, a company launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations. The bikes can be unlocked from one station and returned to any other station in the system anytime. Until now, the marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are members.
@@ -48,6 +53,3 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 <a href="https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">Tableau Public</a>
 
 <a href="https://docs.google.com/presentation/d/1g9QHYIXx1E34URYFD8rJTj1Uec4RgUUL/edit?usp=sharing&ouid=106085838981290799159&rtpof=true&sd=true" target="_blank">Presentation Slides</a>
-
-
-Note : This project was done to fullfil the capstone requirements of the Google Data Analystics Professional Certificate. For more information about this certificate please [Click Here](https://www.coursera.org/professional-certificates/google-data-analytics?utm_source=gg&utm_medium=sem&utm_campaign=15-GoogleDataAnalytics-ROW&utm_content=B2C&campaignid=12566515400&adgroupid=117869292685&device=c&keyword=google%20data%20analytics&matchtype=b&network=g&devicemodel=&adpostion=&creativeid=507290840639&hide_mobile_promo&gclid=EAIaIQobChMIoqPOuK-v9gIV0ud3Ch0DYQ2hEAAYASAAEgJ86fD_BwE)
