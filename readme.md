@@ -43,7 +43,7 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 
 <a href="https://drive.google.com/file/d/1qDxvwQqin7kf5VVnyefTCu43gi7IWDPx/view?usp=sharing" target="_blank">Report</a>
 
-[Source Code](https://github.com/nrabbi/Bike-Rideshare-Data_Analysis/tree/main/R)
+[Source Code](https://github.com/nrabbi/Bike-Rideshare-Data_Analysis/blob/main/R/analysis-R.R)
 
 <a href="https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">Tableau Public</a>
 
