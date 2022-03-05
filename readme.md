@@ -28,11 +28,12 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 
 <a href="https://drive.google.com/file/d/1ef6S7CZNGB_utcN8O9XlF1hdrnpVJONG/view?usp=sharing" target="_blank">Report</a>
 
+
 #### Version 2: SQL
 
 <a href="https://drive.google.com/file/d/1ihv8Rpa0LLSwTkVL8PFRnmLc24Uh3jow/view?usp=sharing" target="_blank">Report</a>
 
-[Source Code](www.google.com)
+[Source Code](https://github.com/nrabbi/Bike-Rideshare-Data_Analysis/tree/main/SQL)
 
 
 
@@ -40,7 +41,7 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 
 <a href="https://drive.google.com/file/d/1qDxvwQqin7kf5VVnyefTCu43gi7IWDPx/view?usp=sharing" target="_blank">Report</a>
 
-[Source Code](www.google.com)
+[Source Code](https://github.com/nrabbi/Bike-Rideshare-Data_Analysis/tree/main/R)
 
 <a href="https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">Tableau Public</a>
 
