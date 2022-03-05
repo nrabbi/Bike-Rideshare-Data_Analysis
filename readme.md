@@ -1,8 +1,6 @@
----
-title: "Bike Rideshare Data Analysis"
-author: "Nazmul Hasan Rabbi"
-date: "March 5 2022"
----
+## Title: Bike Rideshare Data Analysis
+## Author: Nazmul Hasan Rabbi
+## Date: March 5 2022
 
 ### Background
 
@@ -28,20 +26,22 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 
 #### Version 1: Microsoft Excel
 
-[Report](https://drive.google.com/file/d/1ef6S7CZNGB_utcN8O9XlF1hdrnpVJONG/view?usp=sharing)
+<a href="https://drive.google.com/file/d/1ef6S7CZNGB_utcN8O9XlF1hdrnpVJONG/view?usp=sharing" target="_blank">Report</a>
 
 #### Version 2: SQL
 
-[Report](https://drive.google.com/file/d/1ihv8Rpa0LLSwTkVL8PFRnmLc24Uh3jow/view?usp=sharing)
+<a href="https://drive.google.com/file/d/1ihv8Rpa0LLSwTkVL8PFRnmLc24Uh3jow/view?usp=sharing" target="_blank">Report</a>
 
 [Source Code](www.google.com)
+
+
 
 #### Version 3: R & Tableau
 
-[Report](https://drive.google.com/file/d/1qDxvwQqin7kf5VVnyefTCu43gi7IWDPx/view?usp=sharing)
+<a href="https://drive.google.com/file/d/1qDxvwQqin7kf5VVnyefTCu43gi7IWDPx/view?usp=sharing" target="_blank">Report</a>
 
 [Source Code](www.google.com)
 
-[Tableau Public](https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link)
+<a href="https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">Tableau Public</a>
 
-[Presentation Slides](https://docs.google.com/presentation/d/1g9QHYIXx1E34URYFD8rJTj1Uec4RgUUL/edit?usp=sharing&ouid=106085838981290799159&rtpof=true&sd=true)
+<a href="https://docs.google.com/presentation/d/1g9QHYIXx1E34URYFD8rJTj1Uec4RgUUL/edit?usp=sharing&ouid=106085838981290799159&rtpof=true&sd=true" target="_blank">Presentation Slides</a>
