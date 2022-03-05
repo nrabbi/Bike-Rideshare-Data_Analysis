@@ -1,0 +1,7 @@
+"","user_type","ride_type","number_of_rides"
+"1","casual","classic_bike",1266629
+"2","casual","docked_bike",312337
+"3","casual","electric_bike",632301
+"4","member","classic_bike",1984314
+"5","member","docked_bike",1
+"6","member","electric_bike",708545

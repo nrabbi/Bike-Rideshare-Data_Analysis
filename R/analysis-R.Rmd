@@ -1,0 +1,268 @@
+---
+title: "Bike Ride Share Data Analysis"
+author: "Nazmul Hasan Rabbi"
+date: "March 5 2022"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+### Background
+
+In 2016, a company launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations. The bikes can be unlocked from one station and returned to any other station in the system anytime.
+
+Until now, the marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are members.
+
+The company's finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps attract more customers, they believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, there is a very good chance to convert casual riders into members.
+
+### Task
+
+Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. The team are interested in analyzing the historical bike trip data to identify trends.
+
+The assigned task is to answer: How do annual members and casual riders use bikes differently?
+
+**Stakeholders:** Data Analytics Team, Director of Marketing and Executive Team.
+
+### Data Source
+
+The data is offered royalty free for analysis use by Motivate International Inc. The dataset for 2021 will be used to complete this analysis.
+
+### Step 1: Processing Data
+
+```{r loading_libraries, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#load libraries
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+```
+
+We load the libraries we need for the project at the beginning.
+
+```{r read_data, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#read dataset
+jan_2021 <- read_csv("files/202101-divvy-tripdata.csv")
+feb_2021 <- read_csv("files/202102-divvy-tripdata.csv")
+mar_2021 <- read_csv("files/202103-divvy-tripdata.csv")
+apr_2021 <- read_csv("files/202104-divvy-tripdata.csv")
+may_2021 <- read_csv("files/202105-divvy-tripdata.csv")
+jun_2021 <- read_csv("files/202106-divvy-tripdata.csv")
+jul_2021 <- read_csv("files/202107-divvy-tripdata.csv")
+aug_2021 <- read_csv("files/202108-divvy-tripdata.csv")
+sep_2021 <- read_csv("files/202109-divvy-tripdata.csv")
+oct_2021 <- read_csv("files/202110-divvy-tripdata.csv")
+nov_2021 <- read_csv("files/202111-divvy-tripdata.csv")
+dec_2021 <- read_csv("files/202112-divvy-tripdata.csv")
+```
+
+Then we read the dataset for each month of 2021.
+
+```{r combine_data, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#combine all the datasets into a single dataset
+data_2021 <- bind_rows(jan_2021, feb_2021, mar_2021, 
+                       apr_2021, may_2021, jun_2021,
+                       jul_2021, aug_2021, sep_2021,
+                       oct_2021, nov_2021, dec_2021)
+```
+
+Since, the dataset is broken up into months we combine all the data into a single dataset.
+
+```{r rename_columns, echo=TRUE}
+#renaming columns
+data_2021 <- rename(data_2021,
+                    ride_type = rideable_type,
+                    user_type = member_casual)
+```
+
+Then we rename some columnn to befit a more uniform naming convention. The column rideable_type gets renamed to ride_type and the column member_casual gets renamed to user_type.
+
+```{r original_table_dimensions, echo=TRUE}
+#find dimensions of dataset
+dim(data_2021)
+```
+
+Then we see the dimensions of the original combined dataset. That way we can compare after the cleaning process is concluded. We find that it has over 5.5 million rows and 13 columns.
+
+```{r structure_original_dataset, echo=TRUE}
+#see the structure of dataset
+str(data_2021)
+```
+
+Then we see the structure of the combined dataset. It shows all the columns are using the correct column data type so no column type conversion is needed.
+
+### Step 2: Data Cleaning
+
+```{r cleaning_data, echo=TRUE}
+#remove duplicates
+data_2021 <- distinct(data_2021)
+
+#remove rows with missing values in start_station_name_column
+data_2021 <- data_2021[!is.na(data_2021$start_station_name),]
+
+#remove rows with invalid start and end times
+data_2021 <- data_2021[!(data_2021$ended_at < data_2021$started_at),]
+```
+
+We start cleaning the data by removing duplicates in the whole dataset. Then by removing missing values in the start_station_name as that cannot be empty. And then we remove invalid data where the started_at value is later than the ended_at value.
+
+```{r adding_columns}
+#add a new column which calculates the length of the ride 
+data_2021$ride_length <- round(difftime(data_2021$ended_at,data_2021$started_at,units="mins"), digits = 2)
+
+#add a new column which finds the weekday the ride started
+data_2021$weekday <- wday(data_2021$started_at, label = TRUE)
+
+#add a new column which finds the month the ride started
+data_2021$month <- month(data_2021$started_at, label = TRUE)
+```
+
+We add some new columns to extract the data from the original dataset so it is easier to analyze in the next data analysis step. At first we find the duration of the ride and then add that data to a new column called ride_length. Then we extract the day of the week that ride was started and add that data to a new column called weekday. And finally we extract the month of the data that the ride took place and add that data to a new column called month.
+
+```{r missing_value_check, echo=TRUE}
+#see the amount of na values in each column
+colSums(is.na(data_2021))
+```
+
+Then we count the amount of missing value in the dataset. Since, in our target columns there are no missing values we are okay to proceed to the data analysis step.
+
+```{r cleaned_table_dimensions, echo=TRUE}
+#see the updated dimension of the dataset
+dim(data_2021)
+```
+
+We then see the table dimensions after cleaning and compare it with the original table dimensions we calculated in the previous step. We find that our dataset has gone down from around a \~5.5 million to a \~4.9 million rows. But since we added three new columns the columns increased from 13 to 16.
+
+### Step 3: Descriptive Analysis
+
+```{r min_max_avg, echo=TRUE}
+#find avg, min and max statistics
+mean(data_2021$ride_length)
+min(data_2021$ride_length)
+max(data_2021$ride_length)
+```
+
+We calculate the minimum, maximum and average ride length of the whole dataset regardless of user type. We found that the average ride length for all users is around \~22.8 minutes, the minimum 0 minutes and the maximum is around 55944.25 minutes.
+
+```{r summary, echo=TRUE}
+summary(data_2021$ride_length)
+```
+
+Then we check the summary of the whole dataset to verify our previous findings. Since, it matches the previous findings we proceed to more analysis.
+
+```{r order_data, echo=TRUE}
+data_2021$weekday <- ordered(data_2021$weekday, 
+                             levels=c("Mon",
+                                      "Tue",
+                                      "Wed",
+                                      "Thu",
+                                      "Fri",
+                                      "Sat",
+                                      "Sun"))
+```
+
+Before doing any aggregate analysis we need to make sure the order is correct for the weekdays. So explicitly set the order we want from the weekday data.
+
+```{r mean_day_of_week, echo=TRUE}
+#aggregrate data of ride_length by user type and day of week for finding average ride length
+aggregate(data_2021$ride_length ~ data_2021$user_type + data_2021$weekday, FUN=mean)
+```
+
+We find out the average ride length of both members and casual users in each day of the week.
+
+```{r max_day_of_week, echo=TRUE}
+#aggregrate data of ride_length by user type and day of week for finding max ride length
+aggregate(data_2021$ride_length ~ data_2021$user_type + data_2021$weekday, FUN=max)
+```
+
+We find out the maximum ride length of both members and casual users in each day of the week.
+
+### Step 4: Visualization
+
+```{r weekday_number_of_rides, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#visualize number of rides in each weekday
+data_2021 %>% 
+  group_by(user_type, weekday) %>%
+  summarise(number_of_rides = n()) %>% 
+  ggplot(aes(x = weekday, y = number_of_rides, fill = user_type)) + 
+  geom_col(position = "dodge") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Number of Rides on each weekday in 2021")
+```
+
+Here, we calculated and visualized the number of rides that takes place in each day of the week by members and casual users. We can see the casual users used the ride more during the weekends. Whereas, the members used the rides more during weekdays.
+
+```{r weekday_average_length, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#visualize average ride length in each weekday
+data_2021 %>% 
+  group_by(user_type, weekday) %>%
+  summarise(avg_duration = mean(ride_length)) %>% 
+  ggplot(aes(x = weekday, y = avg_duration, fill = user_type)) + 
+  geom_col(position = "dodge") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  scale_y_continuous(labels = scales::comma) +
+  ylab("Ride Duration in (mins)") +
+  ggtitle("Average Ride Length on each weekday in 2021") 
+```
+
+Here, we visualized the average ride length that takes place in each day of the week by members and casual users. We can see the casual users used the ride for much longer periods compared the members.
+
+```{r month_number_of_rides, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#visualize number of rides in each month
+data_2021 %>% 
+  group_by(user_type, month) %>%
+  summarise(number_of_rides = n()) %>% 
+  ggplot(aes(y = month, x = number_of_rides, fill = user_type)) + 
+  geom_col(position = "dodge") + 
+  scale_x_continuous(labels = scales::comma) + 
+  scale_y_discrete(limits=rev) +
+  ggtitle("Number of Rides on each month in 2021")
+```
+
+Here, we calculated and visualized the number of rides that takes place in each month of 2021 by members and casual users. We can see that the demand for the service is much higher during the summer months compared to the winter months. We can use this data to conclude that the weather conditions and the use of the bike ride sharing service is positively co-related to each other.
+
+```{r popularity, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#visualize the popularity of different bike types
+data_2021 %>% 
+  group_by(user_type, ride_type) %>% 
+  summarise(number_of_rides = n()) %>% 
+  ggplot(aes(x = ride_type, y = number_of_rides, fill = user_type)) + 
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Types of Bikes used in 2021")
+```
+
+Here, we calculated and visualized the different types of bikes used by both members and casual users. We can see that the demand for the classic bike much higher compared to the docked and electric bikes by all types of users. We also found that demand for the docked bike is very low and almost no members use docked bike.
+
+### Step 5: Export Summary
+
+```{r export_data, echo=TRUE, results = 'hide', message=FALSE, warning=FALSE}
+#Export number of rides in each weekday
+output1 <- data_2021 %>% 
+  group_by(user_type, weekday) %>%
+  summarise(num_of_rides = n())
+
+write.csv(output1, file='files/num_of_rides_weekday.csv')
+
+#Export average ride duration in each weekday
+output2 <- data_2021 %>% 
+  group_by(user_type, weekday) %>%
+  summarise(avg_duration = mean(ride_length))
+
+write.csv(output2, file='files/ride_length_weekday.csv')
+
+#Export number of rides in each month
+output3 <- data_2021 %>% 
+  group_by(user_type, month) %>%
+  summarise(number_of_rides = n())
+
+write.csv(output3, file='files/num_of_rides_month.csv')
+
+#Export popularity of different ride types
+output4 <- data_2021 %>% 
+  group_by(user_type, ride_type) %>% 
+  summarise(number_of_rides = n())
+
+write.csv(output4, file='files/filesride_type_popularity.csv')
+```
+
+Here we exported the data we collected from this analysis so that we can do further analysis on a visualization software such as Tableau.
