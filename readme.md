@@ -2,8 +2,8 @@
 ## Author: Nazmul Hasan Rabbi
 ## Date: March 5 2022
 
-### Project Context
-This project allowed me to earn the Google Data Analytics Professional Certificate. I did this project to comply with the capstone project requirement of the certificate.
+### Context
+This case study allowed me to earn the Google Data Analytics Professional Certificate. I did this case study to comply with the capstone project requirements of the certificate.
 
 [Verify Certification](https://www.credly.com/badges/f77d7864-f062-473a-a918-11eeafacab33/public_url)
 
