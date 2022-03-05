@@ -20,6 +20,8 @@ Stakeholders: Data Analytics Team, Director of Marketing and Executive Team.
 
 The data is offered royalty free for analysis use by Motivate International Inc. The dataset for 2021 will be used to complete this analysis.
 
+[Source Data](https://divvy-tripdata.s3.amazonaws.com/index.html)
+
 ### Analysis
 
 The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three versions of this analysis. At first the case study was completely analyzed and then visualizations were created with Microsoft Excel. Then the case study was completely analyzed with SQL. And finally, it was analyzed with R and Tableau. The output from the R analysis was used in Tableau to create the visualizations.
@@ -46,3 +48,7 @@ The data was analyzed using Microsoft Excel, SQL, R and Tableau. There are three
 <a href="https://public.tableau.com/views/RideshareBikeAnalysis/weekday_analysis?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">Tableau Public</a>
 
 <a href="https://docs.google.com/presentation/d/1g9QHYIXx1E34URYFD8rJTj1Uec4RgUUL/edit?usp=sharing&ouid=106085838981290799159&rtpof=true&sd=true" target="_blank">Presentation Slides</a>
+
+
+#### Note 
+This project was done to fullfil the capstone requirements of the Google Data Analystics Professional Certificate. For more information about this certificate please [Click Here](https://www.coursera.org/professional-certificates/google-data-analytics?utm_source=gg&utm_medium=sem&utm_campaign=15-GoogleDataAnalytics-ROW&utm_content=B2C&campaignid=12566515400&adgroupid=117869292685&device=c&keyword=google%20data%20analytics&matchtype=b&network=g&devicemodel=&adpostion=&creativeid=507290840639&hide_mobile_promo&gclid=EAIaIQobChMIoqPOuK-v9gIV0ud3Ch0DYQ2hEAAYASAAEgJ86fD_BwE)
